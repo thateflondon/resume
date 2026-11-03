@@ -1,0 +1,153 @@
+% ============================================================
+% CV - Jerry FREDERIC (version française, 2 colonnes, 1 page)
+% Compiler avec XeLaTeX ou LuaLaTeX
+% (Overleaf : Menu > Compiler > choisir XeLaTeX)
+% ============================================================
+\documentclass[9pt,a4paper]{extarticle}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage[top=0.5cm,bottom=0.5cm,left=1.1cm,right=1.1cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{accent}{HTML}{1E77E2}
+\definecolor{grey}{HTML}{555555}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{0.99}
+
+% --- Titres de section (trait sur toute la largeur de la colonne) ---
+\titleformat{\section}
+  {\normalsize\bfseries\color{accent}}{}{0pt}{\MakeUppercase}[\vspace{-0.55em}\rule{\linewidth}{0.5pt}]
+\titlespacing*{\section}{0pt}{0pt}{0.4em}
+\newcommand{\secgap}{\vspace{0.8em}}
+
+% --- Listes à flèches : la flèche est alignée sur le bord gauche du bloc,
+%     le texte est en retrait suspendu ---
+\setlist[itemize]{label={\footnotesize$\rightarrow$}, align=left,
+  labelindent=0pt, labelwidth=1em, labelsep=0.3em, leftmargin=1.3em,
+  itemsep=0.4pt, topsep=1pt, parsep=0pt, partopsep=0pt}
+
+\newcommand{\entry}[3]{%
+  \vspace{0.25em}%
+  {\bfseries #1} \hfill {\color{grey}\footnotesize\mbox{#2}}\\[-1pt]
+  {\color{accent}\footnotesize #3}\par\vspace{0.1em}%
+}
+\newcommand{\skill}[2]{\textbf{#1} : #2\par\vspace{1.5pt}}
+
+\newsavebox{\leftcol}
+\begin{document}
+
+% ================= EN-TÊTE =================
+\begin{center}
+  {\LARGE\bfseries Jerry FREDERIC}\\[0.25em]
+  {\large\color{accent} Développeur Web Frontend}\\[0.25em]
+  {\footnotesize Puteaux (92) \quad $\cdot$ \quad +33 6 82 29 65 59 \quad $\cdot$ \quad
+  \href{mailto:jerry.fpl@outlook.com}{jerry.fpl@outlook.com} \quad $\cdot$ \quad
+  \href{https://www.linkedin.com/in/jerry-frederic/}{LinkedIn} \quad $\cdot$ \quad
+  \href{https://github.com/thateflondon}{GitHub} \quad $\cdot$ \quad
+  \href{https://www.jfpl.fr/}{Portfolio}}
+\end{center}
+
+% ================= PROFIL (pleine largeur) =================
+\secgap
+\section{Profil}
+Développeur frontend professionnel depuis 2020, j'ai découvert le développement dès 2017 en créant des landing pages en HTML/CSS lors de ma mission de Consultant Marketing Digital. Spécialisé en JavaScript et TypeScript, avec des frameworks modernes comme React.js et Next.js, je crée des interfaces intuitives, responsive et performantes, adaptées aux besoins de chaque projet. Fort d'une expérience en solutions SaaS et e-commerce, je livre des solutions de qualité en environnement agile, avec un esprit de collaboration.
+
+\secgap
+
+% ================= DEUX COLONNES 50/50 =================
+\savebox{\leftcol}{%
+\begin{minipage}[t]{0.488\textwidth}
+\section{Expériences professionnelles}
+
+\entry{Développeur Frontend}{Juin 2025 -- Aujourd'hui}{Everest Digital -- Développement web et IA -- Neuilly-sur-Seine}
+\begin{itemize}
+  \item Développement de sites et d'applications avec React.js, Next.js et Node.js, déployés sur Vercel ; CI/CD avec GitHub Actions et workflow GitHub (issues, labels, templates, pull requests)
+  \item Pilotage technique d'une équipe de collaborateurs et stagiaires
+  \item Infrastructure : VPS Oracle Cloud, messagerie Zoho Mail (domaine dédié, comptes collaborateurs), Slack, gestion des credentials avec Bitwarden (2FA), démarche conforme RGPD
+  \item Automatisation n8n auto-hébergé (adresse propre à l'agence) : email de retour client $\rightarrow$ issue GitHub $\rightarrow$ notification Slack
+  \item Création de skills Claude Code personnalisés connectés à l'API Exa (recherche web pour agents IA)
+  \item CRM HubSpot pour la prospection (mise en place en cours)
+\end{itemize}
+
+\entry{Développeur Frontend}{Juin 2022 -- Mars 2025}{Wshop -- SaaS E-commerce -- Paris}
+\begin{itemize}
+  \item \textbf{BUILD} : développement front-end, veille et maintenance de sites e-commerce aux formats Desktop, Mobile, POS (système de point de vente) et Borne via le SaaS de commerce digital unifié WSHOP sur plus de 50 sites e-commerce ; conception, développement et intégration de nouvelles fonctionnalités sur le SaaS et déploiement sur les sites clients
+  \item Développement front-end sur le back-office commun (SaaS), basé sur un template Bootstrap (macros Twig) : intégration responsive from scratch de sites partenaires (Notshycachemire.com, Jonak.fr, Suncoo-paris.fr, Zapa, Vanessa Bruno, Atmosphera), optimisations de performance, correctifs et évolutions
+  \item Intégration et paramétrage du système de code promo et de Mondial Relay sur le back-office commun ; paiements Alma, Klarna, PayPal, Apple Pay
+  \item Conception et développement d'un service de livraison multidestination (plusieurs adresses, un seul panier)
+  \item Refonte d'outils (dette technique) ; documentation technique et tests en pré-production (qualité et fiabilité des mises en ligne)
+  \item Collaboration quotidienne avec Produit, QA, Design, Marketing (SEO) et Clients ; brainstormings et kick-offs projets
+  \item \textbf{RUN} : livraison continue via CI/CD, migration des librairies front-end, optimisation des performances (lazy loading, réduction des bundles, temps de chargement) ; code reviews, bonnes pratiques et onboarding des nouveaux collaborateurs
+  \item \textbf{TMA/Support} : tickets clients et correctifs sur le SaaS et les sites partenaires (affichage, fonctionnel, erreurs JS), debugging, maintenance corrective ; hotfix urgents pour la continuité de service ; documentation des anomalies liées au legacy code
+  \item \textbf{Développement agentique} : Copilot, Claude Code et Cursor
+\end{itemize}
+{\footnotesize\textbf{Technologies/Outils :} JavaScript, Vue 2, Twig, Bootstrap, HTML5, CSS3, Sass/SCSS, PHP, Figma, Git, GitLab, CI/CD, Jira}
+
+\entry{Développeur Frontend}{Juin 2021 -- Févr. 2022}{JFPL.FR -- Poitiers}
+\begin{itemize}
+  \item Maquette et création du site jfpl.fr, intégration en responsive design avec HTML, Sass, JavaScript (ES6), jQuery
+  \item Versioning Git, gestion des dépendances NPM, mise en production après bundle Webpack, hébergement sur Netlify
+\end{itemize}
+
+\entry{Développeur Frontend}{Fév. 2020 -- Avr. 2020}{NKH -- E-commerce -- Paris}
+\begin{itemize}
+  \item Maquette et développement complet d'une plateforme e-commerce responsive cross-device : gestion produits, système de commande, mentions légales, newsletter, FAQ
+  \item Collaboration avec les équipes métier pour traduire les besoins business en fonctionnalités techniques
+\end{itemize}
+\end{minipage}}%
+\noindent\usebox{\leftcol}%
+\hfill
+\begin{minipage}[t]{0.488\textwidth}
+\section{Compétences}
+\skill{Langages de programmation}{JavaScript (ES6+), TypeScript, HTML5, CSS3, Sass/SCSS, GraphQL, PHP}
+\skill{Frameworks \& Bibliothèques}{React.js, Next.js, jQuery, Node.js, Express.js, Bootstrap, Rolly, AOS, Gulp, Webpack}
+\skill{Tests}{Jest, React Testing Library}
+\skill{Versioning \& Collaboration}{Git, GitLab, SourceTree, Jira, ClickUp, BrowserStack}
+\skill{Plateformes \& CMS}{WordPress, Shopify, WooCommerce, Netlify, Heroku, Firebase, AMPPS, Apache}
+\skill{Design \& UI/UX}{Figma, Adobe XD, Photoshop, Illustrator, Sketch, Balsamiq}
+\skill{Infrastructure \& Automatisation}{Oracle Cloud (VPS), n8n, GitHub Actions (CI/CD), Bitwarden, Zoho Mail, Slack API, HubSpot, Vercel, Claude Code, API Exa}
+
+\secgap
+\section{Projets personnels}
+\entry{Speechbot}{}{Next.js 15, TypeScript, Tailwind CSS, Web Speech API}
+\begin{itemize}
+  \item Application web de synthèse vocale (text-to-speech) avec l'API Web Speech : sélection de la langue, détection automatique des voix disponibles, choix de la voix et réglage de la vitesse de lecture
+  \item Architecture en composants réutilisables avec le App Router de Next.js (Button, Dropdown, SpeedSelector, TextArea)
+  \item Interface responsive (mobile, tablette, desktop) en thème sombre, avec état de chargement pendant l'initialisation des voix
+\end{itemize}
+
+\entry{WeTranslate}{}{Next.js 16, React 19, TypeScript, Tailwind CSS 4, pnpm}
+\begin{itemize}
+  \item Application web de traduction en temps réel avec détection automatique de la langue source et inversion rapide des langues
+  \item Synthèse vocale des traductions (Web Speech API) et copie dans le presse-papiers en un clic
+  \item Routes API Next.js (traduction, détection de langue, liste des langues) et composants personnalisés, dont un sélecteur de langue sur mesure ; design responsive
+\end{itemize}
+
+\entry{Portfolio personnel}{}{JavaScript, HTML, Sass, Bootstrap, Rolly.js, Webpack}
+\begin{itemize}
+  \item Intégration JavaScript HTML/Sass avec workflow Webpack personnalisé, optimisation des performances web et compatibilité cross-browser
+  \item Approche mobile-first avec animations et interactions fluides
+\end{itemize}
+
+\secgap
+\section{Formation}
+\entry{Titre Professionnel Développeur Web \& Web Mobile}{2019 -- 2020}{GRETA -- Formation certifiante développement}
+\entry{Bachelor Marketing \& Stratégies Commerciales}{2014 -- 2015}{INSEEC Business School -- Paris}
+
+\secgap
+\section{Langues}
+\textbf{Français} -- Langue maternelle\\
+\textbf{Anglais} -- Intermédiaire
+\end{minipage}
+
+\end{document}
