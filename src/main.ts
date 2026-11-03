@@ -1,12 +1,34 @@
+import Lenis from 'lenis';
+
 type Language = 'en' | 'fr';
 
 class ResumeApp {
+  private lenis: Lenis;
+
   constructor() {
+    this.lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+    });
+
     this.init();
   }
 
   private init(): void {
     this.attachEventListeners();
+    this.startSmoothScroll();
+  }
+
+  private startSmoothScroll(): void {
+    const raf = (time: number) => {
+      this.lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
   }
 
   private attachEventListeners(): void {
@@ -32,40 +54,58 @@ class ResumeApp {
     activeBtn?.classList.remove('text-slate-600', 'hover:bg-slate-50');
     activeBtn?.classList.add('active', 'bg-[#1E77E2]', 'text-white', 'shadow-sm');
 
-    // Update profile text
+    // Update profile text with fade
     const profileEn = document.getElementById('profile-en');
     const profileFr = document.getElementById('profile-fr');
 
     if (lang === 'fr') {
-      profileEn?.classList.add('hidden');
-      profileFr?.classList.remove('hidden');
+      profileEn?.classList.add('opacity-0');
+      setTimeout(() => {
+        profileEn?.classList.add('hidden');
+        profileFr?.classList.remove('hidden');
+        setTimeout(() => profileFr?.classList.remove('opacity-0'), 10);
+      }, 300);
     } else {
-      profileEn?.classList.remove('hidden');
-      profileFr?.classList.add('hidden');
+      profileFr?.classList.add('opacity-0');
+      setTimeout(() => {
+        profileFr?.classList.add('hidden');
+        profileEn?.classList.remove('hidden');
+        setTimeout(() => profileEn?.classList.remove('opacity-0'), 10);
+      }, 300);
     }
 
-    // Update PDF viewers
+    // Update PDF viewers with cross-fade
     const pdfFr = document.getElementById('pdf-fr');
     const pdfEn = document.getElementById('pdf-en');
 
     if (lang === 'fr') {
-      pdfFr?.classList.remove('hidden');
-      pdfEn?.classList.add('hidden');
+      pdfEn?.classList.add('opacity-0');
+      setTimeout(() => {
+        pdfEn?.classList.add('hidden');
+        pdfFr?.classList.remove('hidden');
+        setTimeout(() => pdfFr?.classList.remove('opacity-0'), 10);
+      }, 300);
     } else {
-      pdfFr?.classList.add('hidden');
-      pdfEn?.classList.remove('hidden');
+      pdfFr?.classList.add('opacity-0');
+      setTimeout(() => {
+        pdfFr?.classList.add('hidden');
+        pdfEn?.classList.remove('hidden');
+        setTimeout(() => pdfEn?.classList.remove('opacity-0'), 10);
+      }, 300);
     }
 
-    // Update download buttons
-    const downloadFr = document.getElementById('download-fr');
-    const downloadEn = document.getElementById('download-en');
+    // Update download button
+    const downloadBtn = document.getElementById('download-btn') as HTMLAnchorElement;
+    const downloadText = document.getElementById('download-text');
 
-    if (lang === 'fr') {
-      downloadFr?.classList.remove('hidden');
-      downloadEn?.classList.add('hidden');
-    } else {
-      downloadFr?.classList.add('hidden');
-      downloadEn?.classList.remove('hidden');
+    if (downloadBtn && downloadText) {
+      if (lang === 'fr') {
+        downloadBtn.href = 'Jerry_FREDERIC_CV_FR.pdf';
+        downloadText.textContent = 'Télécharger PDF';
+      } else {
+        downloadBtn.href = 'Jerry_FREDERIC_CV_EN.pdf';
+        downloadText.textContent = 'Download PDF';
+      }
     }
   }
 }
