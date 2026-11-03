@@ -44,8 +44,8 @@ jobs:
 
       - name: Move PDFs to dist
         run: |
-          mv 2026/main_FR.pdf dist/Jerry_FREDERIC_CV_FR.pdf
-          mv 2026/main_EN.pdf dist/Jerry_FREDERIC_CV_EN.pdf
+          mv main_FR.pdf dist/Jerry_FREDERIC_CV_FR.pdf
+          mv main_EN.pdf dist/Jerry_FREDERIC_CV_EN.pdf
 
       - name: Copy static files
         run: |
