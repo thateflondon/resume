@@ -56,6 +56,11 @@ xelatex main_EN.tex  # For English version
 - **Text color**: `#555555` (Grey)
 - **Sans-serif font** throughout
 - **Compact margins** for maximum content density
+- **ATS-friendly**: Optimized for Applicant Tracking Systems
+
+## 📋 License & Usage
+
+**Feel free to use this resume as a template for your own!** This template is open for anyone to adapt and customize for their personal or professional use.
 
 ## 📝 Maintenance
 
