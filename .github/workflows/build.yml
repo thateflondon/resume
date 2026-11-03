@@ -1,0 +1,60 @@
+name: Build LaTeX Resume
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - '2026/**.tex'
+      - 'src/**'
+      - 'index.html'
+      - 'package.json'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Vite project
+        run: npm run build
+
+      - name: Compile LaTeX documents
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: |
+            2026/main_FR.tex
+            2026/main_EN.tex
+          working_directory: ./
+          latexmk_use_xelatex: true
+
+      - name: Move PDFs to dist
+        run: |
+          mv 2026/main_FR.pdf dist/Jerry_FREDERIC_CV_FR.pdf
+          mv 2026/main_EN.pdf dist/Jerry_FREDERIC_CV_EN.pdf
+
+      - name: Copy static files
+        run: |
+          cp robots.txt dist/robots.txt
+          cp sitemap.xml dist/sitemap.xml
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
